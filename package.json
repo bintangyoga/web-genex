@@ -1,5 +1,5 @@
 {
-  "name": "example-app-router-next-auth",
+  "name": "web-genex",
   "private": true,
   "scripts": {
     "dev": "next dev",
