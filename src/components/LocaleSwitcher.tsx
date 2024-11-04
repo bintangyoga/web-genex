@@ -4,7 +4,7 @@ import {Link, usePathname} from '@/i18n/routing';
 export default function LocaleSwitcher() {
   const t = useTranslations('LocaleSwitcher');
   const locale = useLocale();
-  const otherLocale = locale === 'en' ? 'de' : 'en';
+  const otherLocale = locale === 'en' ? 'id' : 'en';
   const pathname = usePathname();
 
   return (

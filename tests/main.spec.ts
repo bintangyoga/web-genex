@@ -49,28 +49,28 @@ describe('default locale', () => {
 
 describe('secondary locale', () => {
   it('allows access to public pages', async ({page}) => {
-    await page.goto('/de');
-    await expect(page).toHaveURL('/de');
+    await page.goto('/id');
+    await expect(page).toHaveURL('/id');
     page.getByRole('heading', {name: 'Startseite'});
     page.getByRole('paragraph', {name: 'Du bist abgemeldet.'});
   });
 
   it('prevents access to secret pages', async ({page}) => {
-    await page.goto('/de');
-    await page.goto('/de/secret');
-    await expect(page).toHaveURL('/de/login?callbackUrl=%2Fde%2Fsecret');
+    await page.goto('/id');
+    await page.goto('/id/secret');
+    await expect(page).toHaveURL('/id/login?callbackUrl=%2Fde%2Fsecret');
   });
 
   describe('logged in', () => {
     beforeEach(async ({page}) => {
-      await page.goto('/de/login');
+      await page.goto('/id/login');
       await page.getByRole('textbox', {name: 'Benutzername'}).type('admin');
       await page.getByRole('textbox', {name: 'Passwort'}).type('admin');
       await page.getByRole('button', {name: 'Anmelden'}).click();
     });
 
     it('redirects to the home page', async ({page}) => {
-      await expect(page).toHaveURL('/de');
+      await expect(page).toHaveURL('/id');
       page.getByRole('paragraph', {name: 'Angemeldet als admin'});
     });
 
@@ -78,7 +78,7 @@ describe('secondary locale', () => {
       await page
         .getByRole('link', {name: 'Geheime Seite für angemeldete Benutzer'})
         .click();
-      await expect(page).toHaveURL('/de/secret');
+      await expect(page).toHaveURL('/id/secret');
       page.getByRole('heading', {name: 'Geheime Seite'});
       page.getByRole('paragraph', {
         name: 'Diese Seite ist nur für angemeldete Benutzer sichtbar.'
@@ -87,7 +87,7 @@ describe('secondary locale', () => {
 
     it('can logout', async ({page}) => {
       await page.getByRole('button', {name: 'Abmelden'}).click();
-      await expect(page).toHaveURL('/de');
+      await expect(page).toHaveURL('/id');
       page.getByRole('paragraph', {name: 'Du bist abgemeldet.'});
     });
   });
